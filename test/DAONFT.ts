@@ -126,7 +126,7 @@ describe("DAO Contracts", function () {
         await daoNFT.connect(voter2).voteForNFT(1);
         
         // Проверяем что NFT был заминчен
-        await expect(daoNFT.connect(voter2).voteForNFT(1))
+        await expect(daoNFT.connect(proposer).voteForNFT(1))
           .to.emit(daoNFT, "NFTMinted")
           .withArgs(1, tokenURI, proposer.address);
         
