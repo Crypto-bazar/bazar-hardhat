@@ -29,7 +29,8 @@ contract DAONFT is ERC721 {
     event Voted(
         uint256 indexed proposalId,
         address indexed voter,
-        string tokenURI
+        string tokenURI,
+        uint amount
     );
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
@@ -65,7 +66,7 @@ contract DAONFT is ERC721 {
         nftProposals[proposalId].votes += voterBalance;
         hasVoted[proposalId][msg.sender] = true;
 
-        emit Voted(proposalId, msg.sender, nftProposals[proposalId].tokenURI);
+        emit Voted(proposalId, msg.sender, nftProposals[proposalId].tokenURI, voterBalance);
 
         if (nftProposals[proposalId].votes >= requiredVotes) {
             mintApprovedNFT(proposalId);
