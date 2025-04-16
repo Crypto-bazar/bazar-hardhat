@@ -8,7 +8,7 @@ contract DAOToken is ERC20 {
 
     constructor(uint256 initialSupply) ERC20("DAO Token", "DAOT") {
         owner = msg.sender;
-        _mint(msg.sender, initialSupply * 10**decimals()); // Выпуск токенов
+        _mint(msg.sender, initialSupply * 10**decimals());
     }
 
     function mint(address to, uint256 amount) public {
