@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract DAONFT is ERC721 {
     IERC20 public governanceToken;
+    IERC20 public paymentToken;
     uint256 private _tokenIdCounter;
 
     struct NFTProposal {
@@ -15,29 +16,87 @@ contract DAONFT is ERC721 {
         bool minted;
     }
 
+    struct NFTSales {
+        uint tokenId;
+        address owner;
+        uint256 price;
+        bool sold;
+    }
+
     mapping(uint256 => NFTProposal) public nftProposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
+    mapping(uint256 => NFTSales) public nftSales;
 
     uint256 public proposalCounter;
-    uint256 public requiredVotes = 1000 * 10**18; // 1000 токенов для успешного голосования
+    uint256 public requiredVotes = 1000 * 10 ** 18;
 
     event NFTProposed(
         uint256 indexed proposalId,
         string tokenURI,
         address proposer
     );
+
     event Voted(
         uint256 indexed proposalId,
         address indexed voter,
         string tokenURI,
         uint amount
     );
+
+    event NFTInSale(
+        uint256 indexed tokenId,
+        address indexed owner,
+        uint256 price
+    );
+
+    event NFTSold(
+        uint256 indexed tokenId,
+        address indexed buyer,
+        uint256 price
+    );
+
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
-    constructor(address _governanceToken) ERC721("DAONFT", "DNFT") {
+    constructor(
+        address _governanceToken,
+        address _paymentToken
+    ) ERC721("DAONFT", "DNFT") {
         governanceToken = IERC20(_governanceToken);
+        paymentToken = IERC20(_paymentToken);
         _tokenIdCounter = 0;
         proposalCounter = 0;
+    }
+
+     function mintNFT() public {
+        _mint(msg.sender, _tokenIdCounter++);
+    }
+
+    function buyNFT(uint256 tokenId) public {
+        NFTSales storage sale = nftSales[tokenId];
+
+        require(!sale.sold, "NFT already sold");
+        require(sale.price > 0, "NFT not for sale");
+        require(
+            paymentToken.transferFrom(msg.sender, sale.owner, sale.price),
+            "Payment failed"
+        );
+
+        _transfer(sale.owner, msg.sender, tokenId);
+        sale.sold = true;
+
+        emit NFTSold(tokenId, msg.sender, sale.price);
+    }
+
+    function sellNFT(uint256 tokenId, uint256 price) public {
+        require(ownerOf(tokenId) == msg.sender, "Not the owner");
+        nftSales[tokenId] = NFTSales({
+            tokenId: tokenId,
+            owner: msg.sender,
+            price: price,
+            sold: false
+        });
+
+        emit NFTInSale(tokenId, msg.sender, price);
     }
 
     function proposeNFT(string memory _tokenURI) public {
@@ -66,7 +125,12 @@ contract DAONFT is ERC721 {
         nftProposals[proposalId].votes += voterBalance;
         hasVoted[proposalId][msg.sender] = true;
 
-        emit Voted(proposalId, msg.sender, nftProposals[proposalId].tokenURI, voterBalance);
+        emit Voted(
+            proposalId,
+            msg.sender,
+            nftProposals[proposalId].tokenURI,
+            voterBalance
+        );
 
         if (nftProposals[proposalId].votes >= requiredVotes) {
             mintApprovedNFT(proposalId);

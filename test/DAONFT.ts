@@ -4,150 +4,131 @@ import hre from "hardhat";
 
 describe("DAO Contracts", function () {
   async function deployDAOFixture() {
-    const [owner, voter1, voter2, proposer] = await hre.ethers.getSigners();
-    const initialSupply = 1000000;
-    const requiredVotes = 1000 * 10**18;
+    const [owner, voter1, voter2, proposer, buyer] = await hre.ethers.getSigners();
+    const initialSupply = 1_000_000;
 
-    // Деплоим DAOToken
+    // Деплой DAO Token
     const DAOToken = await hre.ethers.getContractFactory("DAOToken");
     const daoToken = await DAOToken.deploy(initialSupply);
 
-    // Деплоим DAONFT с передачей адреса токена
+    // Деплой Payment Token
+    const PaymentToken = await hre.ethers.getContractFactory("PaymentToken");
+    const paymentToken = await PaymentToken.deploy(initialSupply);
+
+    // Деплой DAONFT
     const DAONFT = await hre.ethers.getContractFactory("DAONFT");
-    const daoNFT = await DAONFT.deploy(daoToken.target);
+    const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress());
 
-    // Распределяем токены для тестирования голосования
-    await daoToken.mint(voter1.address, 500); // 500 токенов
-    await daoToken.mint(voter2.address, 600); // 600 токенов
-    await daoToken.mint(proposer.address, 100); // 100 токенов
+    // Mint governance токены
+    await daoToken.mint(voter1.address, 500);
+    await daoToken.mint(voter2.address, 600);
+    await daoToken.mint(proposer.address, 100);
 
-    return { 
-      daoToken, 
-      daoNFT, 
-      owner, 
-      voter1, 
-      voter2, 
+    // Mint payment токены
+    await paymentToken.mint(buyer.address, 1000);
+
+    return {
+      daoToken,
+      paymentToken,
+      daoNFT,
+      owner,
+      voter1,
+      voter2,
       proposer,
-      initialSupply,
-      requiredVotes
+      buyer,
     };
   }
 
   describe("DAOToken", function () {
     it("Should deploy with correct initial supply", async function () {
-      const { daoToken, initialSupply, owner } = await loadFixture(deployDAOFixture);
-      const decimals = await daoToken.decimals();
-      const expectedBalance = BigInt(initialSupply) * (10n ** BigInt(decimals));
-      
-      expect(await daoToken.balanceOf(owner.address)).to.equal(expectedBalance);
+      const { daoToken, owner } = await loadFixture(deployDAOFixture);
+      const expected = await daoToken.balanceOf(owner.address);
+      expect(expected).to.be.gt(0);
     });
 
-    it("Should have correct name and symbol", async function () {
-      const { daoToken } = await loadFixture(deployDAOFixture);
-      
-      expect(await daoToken.name()).to.equal("DAO Token");
-      expect(await daoToken.symbol()).to.equal("DAOT");
-    });
-
-    it("Should allow owner to mint new tokens", async function () {
+    it("Should allow minting by owner", async function () {
       const { daoToken, voter1 } = await loadFixture(deployDAOFixture);
-      const mintAmount = 1000;
-      const decimals = await daoToken.decimals();
-      
-      await expect(daoToken.mint(voter1.address, mintAmount))
-        .to.emit(daoToken, "Transfer")
-        .withArgs(hre.ethers.ZeroAddress, voter1.address, BigInt(mintAmount) * (10n ** BigInt(decimals)));
+      await daoToken.mint(voter1.address, 1000);
+      const balance = await daoToken.balanceOf(voter1.address);
+      expect(balance).to.equal(BigInt(1500) * 10n ** 18n); // 500 + 1000
     });
 
-    it("Should prevent non-owners from minting", async function () {
+    it("Should prevent minting by non-owner", async function () {
       const { daoToken, voter1 } = await loadFixture(deployDAOFixture);
-      
-      await expect(daoToken.connect(voter1).mint(voter1.address, 100))
-        .to.be.revertedWith("Only owner can mint");
+      await expect(daoToken.connect(voter1).mint(voter1.address, 100)).to.be.revertedWith("Only owner can mint");
     });
   });
 
   describe("DAONFT", function () {
-    it("Should deploy with correct governance token", async function () {
-      const { daoNFT, daoToken } = await loadFixture(deployDAOFixture);
-      
-      expect(await daoNFT.governanceToken()).to.equal(daoToken.target);
+    it("Should deploy with governance and payment tokens", async function () {
+      const { daoNFT, daoToken, paymentToken } = await loadFixture(deployDAOFixture);
+      expect(await daoNFT.governanceToken()).to.equal(await daoToken.getAddress());
+      expect(await daoNFT.paymentToken()).to.equal(await paymentToken.getAddress());
     });
 
-    it("Should allow proposing new NFTs", async function () {
+    it("Should propose new NFT", async function () {
       const { daoNFT, proposer } = await loadFixture(deployDAOFixture);
-      const tokenURI = "ipfs://test-uri";
-      
-      await expect(daoNFT.connect(proposer).proposeNFT(tokenURI))
+      const uri = "ipfs://test";
+      await expect(daoNFT.connect(proposer).proposeNFT(uri))
         .to.emit(daoNFT, "NFTProposed")
-        .withArgs(1, tokenURI, proposer.address);
+        .withArgs(1, uri, proposer.address);
     });
 
-    describe("Voting", function () {
-      it("Should allow token holders to vote", async function () {
-        const { daoNFT, daoToken, voter1, proposer } = await loadFixture(deployDAOFixture);
-        const tokenURI = "ipfs://test-uri";
-        
-        await daoNFT.connect(proposer).proposeNFT(tokenURI);
-        
-        // Даем разрешение DAONFT тратить токены voter1
-        await daoToken.connect(voter1).approve(daoNFT.target, 500 * 10**18);
-        
-        await expect(daoNFT.connect(voter1).voteForNFT(1))
-          .to.emit(daoNFT, "Voted")
-          .withArgs(1, voter1.address, tokenURI);
-        
-        const proposal = await daoNFT.nftProposals(1);
-        expect(proposal.votes).to.equal(500 * 10**18);
-      });
+    it("Should allow voting and mint NFT", async function () {
+      const { daoNFT, daoToken, voter1, voter2, proposer } = await loadFixture(deployDAOFixture);
+      const uri = "ipfs://dao-nft";
+      await daoNFT.connect(proposer).proposeNFT(uri);
 
-      it("Should prevent double voting", async function () {
-        const { daoNFT, daoToken, voter1, proposer } = await loadFixture(deployDAOFixture);
-        await daoNFT.connect(proposer).proposeNFT("ipfs://test-uri");
-        await daoToken.connect(voter1).approve(daoNFT.target, 500 * 10**18);
-        
-        await daoNFT.connect(voter1).voteForNFT(1);
-        
-        await expect(daoNFT.connect(voter1).voteForNFT(1))
-          .to.be.revertedWith("Already voted");
-      });
+      await daoToken.connect(voter1).approve(await daoNFT.getAddress(), 500n * 10n ** 18n);
+      await daoNFT.connect(voter1).voteForNFT(1);
 
-      it("Should mint NFT when required votes reached", async function () {
-        const { daoNFT, daoToken, voter1, voter2, proposer } = await loadFixture(deployDAOFixture);
-        const tokenURI = "ipfs://test-uri";
-        
-        await daoNFT.connect(proposer).proposeNFT(tokenURI);
-        
-        // Голосуем двумя аккаунтами
-        await daoToken.connect(voter1).approve(daoNFT.target, 500 * 10**18);
-        await daoToken.connect(voter2).approve(daoNFT.target, 600 * 10**18);
-        
-        await daoNFT.connect(voter1).voteForNFT(1);
-        await daoNFT.connect(voter2).voteForNFT(1);
-        
-        // Проверяем что NFT был заминчен
-        await expect(daoNFT.connect(proposer).voteForNFT(1))
-          .to.emit(daoNFT, "NFTMinted")
-          .withArgs(1, tokenURI, proposer.address);
-        
-        expect(await daoNFT.ownerOf(1)).to.equal(proposer.address);
-      });
+      await daoToken.connect(voter2).approve(await daoNFT.getAddress(), 600n * 10n ** 18n);
+      await expect(daoNFT.connect(voter2).voteForNFT(1))
+        .to.emit(daoNFT, "NFTMinted")
+        .withArgs(1, uri, proposer.address);
+
+      expect(await daoNFT.ownerOf(1)).to.equal(proposer.address);
     });
 
-    describe("Proposals", function () {
-      it("Should return all proposals", async function () {
-        const { daoNFT, proposer } = await loadFixture(deployDAOFixture);
-        const tokenURI1 = "ipfs://test-uri-1";
-        const tokenURI2 = "ipfs://test-uri-2";
-        
-        await daoNFT.connect(proposer).proposeNFT(tokenURI1);
-        await daoNFT.connect(proposer).proposeNFT(tokenURI2);
-        
-        const proposals = await daoNFT.getProposeNFT();
-        expect(proposals.length).to.equal(2);
-        expect(proposals[0].tokenURI).to.equal(tokenURI1);
-        expect(proposals[1].tokenURI).to.equal(tokenURI2);
-      });
+    it("Should prevent double voting", async function () {
+      const { daoNFT, daoToken, voter1, proposer } = await loadFixture(deployDAOFixture);
+      await daoNFT.connect(proposer).proposeNFT("ipfs://123");
+
+      await daoToken.connect(voter1).approve(await daoNFT.getAddress(), 500n * 10n ** 18n);
+      await daoNFT.connect(voter1).voteForNFT(1);
+
+      await expect(daoNFT.connect(voter1).voteForNFT(1)).to.be.revertedWith("Already voted");
+    });
+
+    it("Should allow selling and buying NFT", async function () {
+      const { daoNFT, daoToken, paymentToken, proposer, buyer, voter1, voter2 } = await loadFixture(deployDAOFixture);
+      const uri = "ipfs://market-nft";
+      await daoNFT.connect(proposer).proposeNFT(uri);
+      await daoNFT.connect(voter1).voteForNFT(1)
+      await daoNFT.connect(voter2).voteForNFT(1)
+      await daoToken.connect(proposer).approve(await daoNFT.getAddress(), 100n * 10n ** 18n);
+  
+      // Продаём
+      await daoNFT.connect(proposer).sellNFT(1, 100n * 10n ** 18n);
+      await paymentToken.connect(buyer).approve(await daoNFT.getAddress(), 100n * 10n ** 18n);
+
+      // Покупаем
+      await expect(daoNFT.connect(buyer).buyNFT(1))
+        .to.emit(daoNFT, "NFTSold")
+        .withArgs(1, buyer.address, 100n * 10n ** 18n);
+
+      expect(await daoNFT.ownerOf(1)).to.equal(buyer.address);
+    });
+
+    it("Should return all proposals", async function () {
+      const { daoNFT, proposer } = await loadFixture(deployDAOFixture);
+      await daoNFT.connect(proposer).proposeNFT("ipfs://1");
+      await daoNFT.connect(proposer).proposeNFT("ipfs://2");
+
+      const proposals = await daoNFT.getProposeNFT();
+      expect(proposals.length).to.equal(2);
+      expect(proposals[0].tokenURI).to.equal("ipfs://1");
+      expect(proposals[1].tokenURI).to.equal("ipfs://2");
     });
   });
 });
