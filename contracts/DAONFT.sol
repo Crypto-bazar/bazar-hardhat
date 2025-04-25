@@ -57,43 +57,21 @@ contract DAONFT is ERC721 {
         uint256 price
     );
 
-    event TokensPurchased(address indexed buyer, uint256 amount, uint256 cost);
-
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
     constructor(
         address _governanceToken,
-        address _paymentToken,
-        uint256 _tokenPrice
+        address _paymentToken
     ) ERC721("DAONFT", "DNFT") {
         governanceToken = IERC20(_governanceToken);
         paymentToken = IERC20(_paymentToken);
         _tokenIdCounter = 0;
         proposalCounter = 0;
-        tokenPrice = _tokenPrice;
     }
-    //TODO доделать покупку DAO токенов. Покупка за POP токены.
 
-    function mintNFT() public {
+     function mintNFT() public {
         _mint(msg.sender, _tokenIdCounter++);
     }
-
-    function getQuorum() public view returns (uint256) {
-        return governanceToken.totalSupply() / 100;
-    }
-
-    function buyGovernanceTokens(uint256 amount) public {
-    uint256 cost = amount * tokenPrice;
-    require(
-        paymentToken.transferFrom(msg.sender, address(this), cost),
-        "Payment failed"
-    );
-
-    // Теперь минтим governance токены
-    DAOToken(address(governanceToken)).mint(msg.sender, amount);
-
-    emit TokensPurchased(msg.sender, amount, cost);
-}
 
     function buyNFT(uint256 tokenId) public {
         NFTSales storage sale = nftSales[tokenId];
