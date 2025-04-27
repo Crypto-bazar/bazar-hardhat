@@ -1,5 +1,6 @@
 node_modules
 .env
+ignition/deployments/chain-1337
 
 # Hardhat files
 /cache

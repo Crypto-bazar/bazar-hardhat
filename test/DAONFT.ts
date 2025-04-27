@@ -17,7 +17,7 @@ describe("DAO Contracts", function () {
 
     // Деплой DAONFT
     const DAONFT = await hre.ethers.getContractFactory("DAONFT");
-    const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress());
+    const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress(), 1);
 
     // Mint governance токены
     await daoToken.mint(voter1.address, 500);
@@ -26,6 +26,9 @@ describe("DAO Contracts", function () {
 
     // Mint payment токены
     await paymentToken.mint(buyer.address, 1000);
+
+    await daoToken.mint(await daoNFT.getAddress(), 1_000_000n * 10n ** 18n);
+
 
     return {
       daoToken,
@@ -120,6 +123,18 @@ describe("DAO Contracts", function () {
       expect(await daoNFT.ownerOf(1)).to.equal(buyer.address);
     });
 
+    it("Should buy Governance tokens", async function () {
+      const { daoNFT, paymentToken, buyer, daoToken } = await loadFixture(deployDAOFixture);
+      const amount = 1000n * 10n ** 18n;
+      await paymentToken.connect(buyer).approve(await daoNFT.getAddress(), amount);
+
+      await expect(daoNFT.connect(buyer).buyGovernanceTokens(amount))
+      .to.emit(daoNFT, "TokensPurchased")
+      .withArgs(buyer.address, amount, amount); // amount и cost одинаковые
+  
+      expect(await daoToken.balanceOf(buyer)).to.equal(await daoToken.balanceOf(buyer.address) + amount);
+    });
+
     it("Should return all proposals", async function () {
       const { daoNFT, proposer } = await loadFixture(deployDAOFixture);
       await daoNFT.connect(proposer).proposeNFT("ipfs://1");
@@ -130,5 +145,6 @@ describe("DAO Contracts", function () {
       expect(proposals[0].tokenURI).to.equal("ipfs://1");
       expect(proposals[1].tokenURI).to.equal("ipfs://2");
     });
+    
   });
 });

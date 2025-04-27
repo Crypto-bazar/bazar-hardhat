@@ -3,11 +3,13 @@ pragma solidity ^0.8.29;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./Token.sol";
 
 contract DAONFT is ERC721 {
     IERC20 public governanceToken;
     IERC20 public paymentToken;
     uint256 private _tokenIdCounter;
+    uint256 public tokenPrice;
 
     struct NFTProposal {
         string tokenURI;
@@ -55,21 +57,43 @@ contract DAONFT is ERC721 {
         uint256 price
     );
 
+    event TokensPurchased(address indexed buyer, uint256 amount, uint256 cost);
+
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
     constructor(
         address _governanceToken,
-        address _paymentToken
+        address _paymentToken,
+        uint256 _tokenPrice
     ) ERC721("DAONFT", "DNFT") {
         governanceToken = IERC20(_governanceToken);
         paymentToken = IERC20(_paymentToken);
         _tokenIdCounter = 0;
         proposalCounter = 0;
+        tokenPrice = _tokenPrice;
     }
+    //TODO доделать покупку DAO токенов. Покупка за POP токены.
 
-     function mintNFT() public {
+    function mintNFT() public {
         _mint(msg.sender, _tokenIdCounter++);
     }
+
+    function getQuorum() public view returns (uint256) {
+        return governanceToken.totalSupply() / 100;
+    }
+
+    function buyGovernanceTokens(uint256 amount) public {
+    uint256 cost = amount * tokenPrice;
+    require(
+        paymentToken.transferFrom(msg.sender, address(this), cost),
+        "Payment failed"
+    );
+
+    // Теперь минтим governance токены
+    DAOToken(address(governanceToken)).mint(msg.sender, amount);
+
+    emit TokensPurchased(msg.sender, amount, cost);
+}
 
     function buyNFT(uint256 tokenId) public {
         NFTSales storage sale = nftSales[tokenId];
