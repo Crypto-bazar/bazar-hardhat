@@ -7,34 +7,21 @@ describe("DAO Contracts", function() {
     const [owner, voter1, voter2, proposer, buyer] = await hre.ethers.getSigners();
     const initialSupply = 1_000_000;
 
-    // Деплой DAO Token
     const DAOToken = await hre.ethers.getContractFactory("DAOToken");
     const daoToken = await DAOToken.deploy(initialSupply);
 
-    // Деплой Payment Token
     const PaymentToken = await hre.ethers.getContractFactory("PaymentToken");
     const paymentToken = await PaymentToken.deploy(initialSupply);
 
-    // Деплой DAONFT
     const DAONFT = await hre.ethers.getContractFactory("DAONFT");
     const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress(), 1);
 
-    // Mint governance токены
     await daoToken.mint(voter1.address, 500000);
     await daoToken.mint(voter2.address, 600000);
     await daoToken.mint(proposer.address, 100);
     await daoToken.mint(await daoNFT.getAddress(), 1_000_000n * 10n ** 18n);
     await daoToken.changeOwner(daoNFT.getAddress())
-
-    const requiredVotes = await daoNFT.getRequiredVotes();
-    console.log("Required votes:", requiredVotes / 10n ** 18n);
-
-
-
-    // Mint payment токены
     await paymentToken.mint(buyer.address, 1000);
-
-
 
     return {
       daoToken,
@@ -111,19 +98,15 @@ describe("DAO Contracts", function() {
       const { daoNFT, daoToken, paymentToken, proposer, buyer, voter1, voter2 } = await loadFixture(deployDAOFixture);
       const uri = "ipfs://market-nft";
 
-      // Propose and vote for NFT
       await daoNFT.connect(proposer).proposeNFT(uri);
       await daoNFT.connect(voter1).voteForNFT(1);
       await daoNFT.connect(voter2).voteForNFT(1);
 
-      // The minted NFT will have tokenId 0 (since _tokenIdCounter starts at 0)
       const tokenId = 0;
 
-      // Approve and sell
       await daoToken.connect(proposer).approve(await daoNFT.getAddress(), 100n * 10n ** 18n);
       await daoNFT.connect(proposer).sellNFT(tokenId, 100n * 10n ** 18n);
 
-      // Approve and buy
       await paymentToken.connect(buyer).approve(await daoNFT.getAddress(), 100n * 10n ** 18n);
       await expect(daoNFT.connect(buyer).buyNFT(tokenId))
         .to.emit(daoNFT, "NFTSold")
