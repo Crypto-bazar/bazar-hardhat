@@ -31,7 +31,7 @@ contract DAONFT is ERC721 {
 
     uint256 public proposalCounter;
     uint256 public baseRequiredVotes = 1000 * 10 ** 18; // Базовое значение
-    uint256 public difficultyDivider = 1000; // Делитель сложности
+    uint256 public difficultyDivider = 1000000000000000000; // Делитель сложности
 
     event NFTProposed(uint256 indexed proposalId, string tokenURI, address proposer);
     event Voted(uint256 indexed proposalId, address indexed voter, string tokenURI, uint amount);
