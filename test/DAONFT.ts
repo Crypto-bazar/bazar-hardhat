@@ -20,14 +20,17 @@ describe("DAO Contracts", function () {
     const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress(), 1);
 
     // Mint governance токены
-    await daoToken.mint(voter1.address, 500);
-    await daoToken.mint(voter2.address, 600);
+    await daoToken.mint(voter1.address, 500000);
+    await daoToken.mint(voter2.address, 600000);
     await daoToken.mint(proposer.address, 100);
+    await daoToken.mint(await daoNFT.getAddress(), 1_000_000n * 10n ** 18n);
+    await daoToken.changeOwner(daoNFT.getAddress())
+    
+    
 
     // Mint payment токены
     await paymentToken.mint(buyer.address, 1000);
 
-    await daoToken.mint(await daoNFT.getAddress(), 1_000_000n * 10n ** 18n);
 
 
     return {
@@ -51,9 +54,9 @@ describe("DAO Contracts", function () {
 
     it("Should allow minting by owner", async function () {
       const { daoToken, voter1 } = await loadFixture(deployDAOFixture);
-      await daoToken.mint(voter1.address, 1000);
+      await  expect(daoToken.mint(voter1.address, 1000)).to.be.rejectedWith("Only owner can mint")
       const balance = await daoToken.balanceOf(voter1.address);
-      expect(balance).to.equal(BigInt(1500) * 10n ** 18n); // 500 + 1000
+      expect(balance).to.equal(BigInt(500) * 10n ** 18n); // 500
     });
 
     it("Should prevent minting by non-owner", async function () {
@@ -82,10 +85,8 @@ describe("DAO Contracts", function () {
       const uri = "ipfs://dao-nft";
       await daoNFT.connect(proposer).proposeNFT(uri);
 
-      await daoToken.connect(voter1).approve(await daoNFT.getAddress(), 500n * 10n ** 18n);
       await daoNFT.connect(voter1).voteForNFT(1);
 
-      await daoToken.connect(voter2).approve(await daoNFT.getAddress(), 600n * 10n ** 18n);
       await expect(daoNFT.connect(voter2).voteForNFT(1))
         .to.emit(daoNFT, "NFTMinted")
         .withArgs(1, uri, proposer.address);
