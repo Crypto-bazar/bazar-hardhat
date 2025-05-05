@@ -670,6 +670,11 @@
 						"type": "address"
 					},
 					{
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "price",
 						"type": "uint256"
@@ -1226,11 +1231,11 @@
 			]
 		},
 		"contracts/DAONFT.sol": {
-			"keccak256": "0x214a708bd5583b28d60aaf650a1fb8b9d3daa3153743ad40cea96df857322220",
+			"keccak256": "0xf7b385ea85236bea69724e80a4f2c9d3e30367408338cf19680d2806a076e822",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fc349bea2afa8a465e9e5bda96aa4062985c9d30718a106075682baeae069e72",
-				"dweb:/ipfs/QmdurPXfPckC5ezYvE5qhnV1tZUdM7ur2Fz1wN1x1LBNCR"
+				"bzz-raw://e71a6e1ded907fb239d8693dcc7fd96225a2ad5de8932910578c9b1f3722424f",
+				"dweb:/ipfs/QmfKZvdsLrdjCNxrLYZKBr5Kb7oaVkcCNqxqfLAdujJcu3"
 			]
 		},
 		"contracts/Token.sol": {

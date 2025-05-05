@@ -22,6 +22,7 @@ contract DAONFT is ERC721 {
     struct NFTSales {
         uint256 tokenId;
         address owner;
+        address creator;
         uint256 price;
         bool sold;
     }
@@ -32,7 +33,7 @@ contract DAONFT is ERC721 {
 
     uint256 public proposalCounter;
     uint256 public baseRequiredVotes = 1000 * 10**18;
-    uint256 public difficultyDivider = 1000000000000000000;
+    uint256 public difficultyDivider = 1000000000000;
 
     event NFTProposed(
         uint256 indexed proposalId,
@@ -83,33 +84,30 @@ contract DAONFT is ERC721 {
         require(amount > 0, "Amount must be greater than 0");
         uint256 ethRequired = amount * paymentTokenPrice;
         require(msg.value >= ethRequired, "Insufficient ETH sent");
-        
+
         uint256 contractBalance = paymentToken.balanceOf(address(this));
         require(contractBalance >= amount, "Insufficient tokens in contract");
-        
+
         bool success = paymentToken.transfer(msg.sender, amount);
         require(success, "Token transfer failed");
-        
+
         // Возвращаем излишки ETH, если пользователь отправил больше чем нужно
         if (msg.value > ethRequired) {
             payable(msg.sender).transfer(msg.value - ethRequired);
         }
-        
+
         emit TokensPurchased(msg.sender, ethRequired, amount);
     }
 
     function buyGovernanceTokens(uint256 amount) public {
         uint256 cost = amount * tokenPrice;
-        uint256 contractBalance = paymentToken.balanceOf(address(this));
-        require(contractBalance >= amount, "Insufficient tokens in contract");
 
         require(
             paymentToken.transferFrom(msg.sender, address(this), cost),
             "Payment failed"
         );
 
-        bool success = governanceToken.transfer(msg.sender, amount);
-        require(success, "Token transfer failed");
+        governanceToken.mint(msg.sender, amount);
 
         emit TokensPurchased(msg.sender, amount, cost);
     }
@@ -119,9 +117,24 @@ contract DAONFT is ERC721 {
 
         require(!sale.sold, "NFT already sold");
         require(sale.price > 0, "NFT not for sale");
+
+        uint256 creatorFee = (sale.price * 1) / 100;
+        uint256 sellerAmount = sale.price - creatorFee;
+
+        // Покупатель платит контракту
         require(
-            paymentToken.transferFrom(msg.sender, sale.owner, sale.price),
+            paymentToken.transferFrom(msg.sender, address(this), sale.price),
             "Payment failed"
+        );
+
+        // Контракт распределяет средства
+        require(
+            paymentToken.transfer(sale.creator, creatorFee),
+            "Creator fee failed"
+        );
+        require(
+            paymentToken.transfer(sale.owner, sellerAmount),
+            "Payment to seller failed"
         );
 
         _transfer(sale.owner, msg.sender, tokenId);
@@ -132,9 +145,26 @@ contract DAONFT is ERC721 {
 
     function sellNFT(uint256 tokenId, uint256 price) public {
         require(ownerOf(tokenId) == msg.sender, "Not the owner");
+
+        // Поиск оригинального создателя (автора) NFT
+        address creator = address(0);
+        for (uint256 i = 1; i <= proposalCounter; i++) {
+            if (
+                nftProposals[i].minted &&
+                keccak256(bytes(nftProposals[i].tokenURI)) ==
+                keccak256(bytes(tokenURI(tokenId)))
+            ) {
+                creator = nftProposals[i].proposer;
+                break;
+            }
+        }
+
+        require(creator != address(0), "Creator not found");
+
         nftSales[tokenId] = NFTSales({
             tokenId: tokenId,
             owner: msg.sender,
+            creator: creator, // сохраняем автора
             price: price,
             sold: false
         });
