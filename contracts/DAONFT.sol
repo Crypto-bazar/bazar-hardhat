@@ -53,7 +53,7 @@ contract DAONFT is ERC721 {
         paymentTokenPrice = _paymentTokenPrice;
     }
 
-    function mintNFT() public {
+     function mintNFT() public {
         _mint(msg.sender, _tokenIdCounter++);
     }
 
