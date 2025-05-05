@@ -20,7 +20,7 @@ contract DAONFT is ERC721 {
     }
 
     struct NFTSales {
-        uint tokenId;
+        uint256 tokenId;
         address owner;
         uint256 price;
         bool sold;
@@ -31,13 +31,30 @@ contract DAONFT is ERC721 {
     mapping(uint256 => NFTSales) public nftSales;
 
     uint256 public proposalCounter;
-    uint256 public baseRequiredVotes = 1000 * 10 ** 18;
-    uint256 public difficultyDivider = 1000000000000000000; 
+    uint256 public baseRequiredVotes = 1000 * 10**18;
+    uint256 public difficultyDivider = 1000000000000000000;
 
-    event NFTProposed(uint256 indexed proposalId, string tokenURI, address proposer);
-    event Voted(uint256 indexed proposalId, address indexed voter, string tokenURI, uint amount);
-    event NFTInSale(uint256 indexed tokenId, address indexed owner, uint256 price);
-    event NFTSold(uint256 indexed tokenId, address indexed buyer, uint256 price);
+    event NFTProposed(
+        uint256 indexed proposalId,
+        string tokenURI,
+        address proposer
+    );
+    event Voted(
+        uint256 indexed proposalId,
+        address indexed voter,
+        string tokenURI,
+        uint256 amount
+    );
+    event NFTInSale(
+        uint256 indexed tokenId,
+        address indexed owner,
+        uint256 price
+    );
+    event NFTSold(
+        uint256 indexed tokenId,
+        address indexed buyer,
+        uint256 price
+    );
     event TokensPurchased(address indexed buyer, uint256 amount, uint256 cost);
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
@@ -53,7 +70,7 @@ contract DAONFT is ERC721 {
         paymentTokenPrice = _paymentTokenPrice;
     }
 
-     function mintNFT() public {
+    function mintNFT() public {
         _mint(msg.sender, _tokenIdCounter++);
     }
 
@@ -62,9 +79,9 @@ contract DAONFT is ERC721 {
         return baseRequiredVotes + (circulatingSupply / difficultyDivider);
     }
 
-     function buyPopTokens(uint256 amount) public payable {
+    function buyPopTokens(uint256 amount) public payable {
         require(amount > 0, "Amount must be greater than 0");
-        uint256 ethRequired = amount * tokenPrice;
+        uint256 ethRequired = amount * paymentTokenPrice;
         require(msg.value >= ethRequired, "Insufficient ETH sent");
         
         uint256 contractBalance = paymentToken.balanceOf(address(this));
@@ -85,12 +102,12 @@ contract DAONFT is ERC721 {
         uint256 cost = amount * tokenPrice;
         uint256 contractBalance = paymentToken.balanceOf(address(this));
         require(contractBalance >= amount, "Insufficient tokens in contract");
-        
+
         require(
             paymentToken.transferFrom(msg.sender, address(this), cost),
             "Payment failed"
         );
-        
+
         bool success = governanceToken.transfer(msg.sender, amount);
         require(success, "Token transfer failed");
 
@@ -151,7 +168,12 @@ contract DAONFT is ERC721 {
         nftProposals[proposalId].votes += voterBalance;
         hasVoted[proposalId][msg.sender] = true;
 
-        emit Voted(proposalId, msg.sender, nftProposals[proposalId].tokenURI, voterBalance);
+        emit Voted(
+            proposalId,
+            msg.sender,
+            nftProposals[proposalId].tokenURI,
+            voterBalance
+        );
 
         if (nftProposals[proposalId].votes >= getRequiredVotes()) {
             mintApprovedNFT(proposalId);
