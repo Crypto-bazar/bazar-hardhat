@@ -1,8 +1,0 @@
-{
-  "_format": "hh-sol-dbg-1",
-<<<<<<< HEAD
-  "buildInfo": "../build-info/2b965ab770a5095a1097cd6e8fcff7ed.json"
-=======
-  "buildInfo": "../build-info/17ff408e4c4065948f323ee22d49eb9d.json"
->>>>>>> 67747e4 (Add PaymentToken contract artifacts and build info for chain-1337 deployment)
-}
