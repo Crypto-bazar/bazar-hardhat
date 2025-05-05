@@ -14,7 +14,7 @@ describe("DAO Contracts", function() {
     const paymentToken = await PaymentToken.deploy(initialSupply);
 
     const DAONFT = await hre.ethers.getContractFactory("DAONFT");
-    const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress(), 1);
+    const daoNFT = await DAONFT.deploy(daoToken.getAddress(), paymentToken.getAddress(), 100000000, 100000000);
 
     await daoToken.mint(voter1.address, 500000);
     await daoToken.mint(voter2.address, 600000);

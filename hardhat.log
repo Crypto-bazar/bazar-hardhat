@@ -69,8 +69,6 @@ Private Key: 0xdf57089febbacf7ba0bc227dafbffa9fc08a93fdc68e1e42411a14efcf23656e
 WARNING: These accounts, and their private keys, are publicly known.
 Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
-[32meth_blockNumber[0m
-[32meth_getBlockByNumber[0m
 [32meth_chainId[0m
 [32meth_accounts[0m
 [32mhardhat_getAutomine[0m
@@ -93,11 +91,11 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 [32meth_sendTransaction[0m
   Contract deployment: DAOToken
   Contract address:    0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Transaction:         0x7662bbe4e8e0bbb913cdb1db3ae8f666feefd59af1ef44e9398f4b095a16d359
+  Transaction:         0xc125dde7027792847ed081264fbb1c210f4930612b3cca0b590544b29a318a93
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
-  Gas used:            1211586 of 1211586
-  Block #1:            0xa36cfca6fc973c037aa8495d490aba9733fc8cfb3b47ba8274423fc75c58f6b6
+  Gas used:            1176613 of 1176613
+  Block #1:            0x71363d25dcf842a51b7bdabeee77cad3f92a8533ff1ad0b95453c7345b0accb0
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -115,11 +113,11 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 [32meth_sendTransaction[0m
   Contract deployment: PaymentToken
   Contract address:    0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-  Transaction:         0xee517a9c7cd73dc0bcba375c1790ca36b86b63536f875917e39d465eac1b8509
+  Transaction:         0xe0e0abe2c2816615b8096939800b556914a0613045ef1d5457c9e33342af3093
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
-  Gas used:            1211502 of 1211502
-  Block #2:            0x40ab2dd12035986480b8854160b442ca2813e7a38166959fd93e67be21bd24b0
+  Gas used:            1099455 of 1099455
+  Block #2:            0x4b0d3817a04637a9a5a2a3bd775a01e92e90f071f97edbe9d8cee22767dbeb97
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -138,11 +136,11 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 [32meth_sendTransaction[0m
   Contract deployment: DAONFT
   Contract address:    0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
-  Transaction:         0xed4aa8d17c2d49b9e44511c6ba7a3d478d9010dc2a5b9f8570689f80f83ec8e6
+  Transaction:         0xf846cf363bd8ba9b1a8e9d34f17bfb47e92475f3668bafba63d3a7cdfe7393ae
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   Value:               0 ETH
-  Gas used:            3499299 of 3499299
-  Block #3:            0x08e9da174eac453f4f4ec82356b7a4bc811a135ff81ee9ca061be1a8e66e71b6
+  Gas used:            4212634 of 4212634
+  Block #3:            0x120b172ff4775b5e3015b610871503314b63de4691c9d371e92ea2b16472f528
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -159,34 +157,12 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
 [32meth_sendTransaction[0m
   Contract call:       DAOToken#transfer
-  Transaction:         0x0f39e2530bcc3ed2277e92f62a85e99c26da4747a587f51ae3cd073a9cdb5236
+  Transaction:         0x881b8abc32b706a1bcfa8855705c5b0a3a11710227e01f9aa35e24ead36089ed
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            52244 of 52244
-  Block #4:            0x9a614bd1b0e9da848389e1dc4218fa8e7b00a532f17841dc979d626ec7591503
-
-[32meth_getTransactionByHash[0m
-[32meth_getBlockByNumber[0m
-[32meth_getTransactionReceipt[0m
-[32meth_getTransactionCount[0m
-[32meth_getBlockByNumber[0m
-[32meth_chainId[0m
-[32meth_maxPriorityFeePerGas[0m
-[32meth_estimateGas[0m
-[32meth_call[0m
-  Contract call:       PaymentToken#transfer
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-[32meth_sendTransaction[0m
-  Contract call:       PaymentToken#transfer
-  Transaction:         0x027b1161a38c07937bed7ec8457cddfc5c08cb7ed2bd33a26e93b13847376f63
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
   Value:               0 ETH
   Gas used:            52244 of 52244
-  Block #5:            0x52b89042294c466637066d12b3969afdd75f78a5fdd6b0dc2fd03eb2fb3dcef0
+  Block #4:            0xc780957ebfe2d0c34a49c4eb7b9311268cb48513bf0847d1d8a8280699635e49
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -203,12 +179,56 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
 [32meth_sendTransaction[0m
   Contract call:       DAOToken#transfer
-  Transaction:         0x1353a9df45307380c3f0b166a64f578e310ce98c1bb51bd42a93f7393335c81e
+  Transaction:         0x2bbc9ac6114e172685386d28bd8c7cf753f052c5a647f72dcc1955f0cc2a4d6f
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
   Value:               0 ETH
   Gas used:            52232 of 52232
-  Block #6:            0x838cb0159919d3e3b3ae5e5a21f8bcd4626fc63ad2c8217c35a7543e5196ccf7
+  Block #5:            0x538fefd1cb74157b0b249d687b3cd07bfd152e425c59a9b1a577d2812988b464
+
+[32meth_getTransactionByHash[0m
+[32meth_getBlockByNumber[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionCount[0m
+[32meth_getBlockByNumber[0m
+[32meth_chainId[0m
+[32meth_maxPriorityFeePerGas[0m
+[32meth_estimateGas[0m
+[32meth_call[0m
+  Contract call:       DAOToken#transfer
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_sendTransaction[0m
+  Contract call:       DAOToken#transfer
+  Transaction:         0x81f677c0645d8d6c697e13eee5d606a7da8bd61ca1a251ce12a1259f70bb8d99
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            52244 of 52244
+  Block #6:            0xb8bfed20bb86ea7558d075636cb9dd6a400f1292226345d6e0dd9563dad4f2c2
+
+[32meth_getTransactionByHash[0m
+[32meth_getBlockByNumber[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionCount[0m
+[32meth_getBlockByNumber[0m
+[32meth_chainId[0m
+[32meth_maxPriorityFeePerGas[0m
+[32meth_estimateGas[0m
+[32meth_call[0m
+  Contract call:       DAOToken#transfer
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_sendTransaction[0m
+  Contract call:       DAOToken#transfer
+  Transaction:         0x71f125f7499023df7313697f4711d3f00e05327f0ec09a528f964de21e48412b
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            52244 of 52244
+  Block #7:            0x8134743cd881d3e240752b48df3646ee0357c021a3a0f941b2e7fc247b28ff8a
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -225,34 +245,34 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
 [32meth_sendTransaction[0m
   Contract call:       PaymentToken#transfer
-  Transaction:         0x770ccadb823fe33008176b4befeb40292b5675760ee1a45d5a3d7e09e1d1c5f3
+  Transaction:         0xc509e6355cc7874bcffbead3121971c8a3a6ec5ca66bcc65dfa2b9271deae069
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            52244 of 52244
+  Block #8:            0xa5b24f1e17f6b3173ff6a5185f565830f57b5523805b1050d2613a6102fff0c3
+
+[32meth_getTransactionByHash[0m
+[32meth_getBlockByNumber[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionCount[0m
+[32meth_getBlockByNumber[0m
+[32meth_chainId[0m
+[32meth_maxPriorityFeePerGas[0m
+[32meth_estimateGas[0m
+[32meth_call[0m
+  Contract call:       PaymentToken#transfer
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
+[32meth_sendTransaction[0m
+  Contract call:       PaymentToken#transfer
+  Transaction:         0x16a033c633454e47edb51758ff091cb4797020d4bcdd8d4df6ee9b8e2d50c4ab
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
   Value:               0 ETH
   Gas used:            52232 of 52232
-  Block #7:            0x771a04ea8fc6eb17b461b71f196498ecd89c7c5b9e115381d8315a0daacff497
-
-[32meth_getTransactionByHash[0m
-[32meth_getBlockByNumber[0m
-[32meth_getTransactionReceipt[0m
-[32meth_getTransactionCount[0m
-[32meth_getBlockByNumber[0m
-[32meth_chainId[0m
-[32meth_maxPriorityFeePerGas[0m
-[32meth_estimateGas[0m
-[32meth_call[0m
-  Contract call:       DAOToken#transfer
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_sendTransaction[0m
-  Contract call:       DAOToken#transfer
-  Transaction:         0xfaab432540177204d65076675d33e4cbed133f51cf7b37590449880561c89ec1
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            52244 of 52244
-  Block #8:            0xffe2106f91fa6c1176a78ffadab30eba8ed81336c2c0aac5b7a31bd2c458f307
+  Block #9:            0x5ec1243d56ead1ae6fd6b475509de17d5e588f57ab87379f8af59a19747577bb
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -269,34 +289,12 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
 [32meth_sendTransaction[0m
   Contract call:       PaymentToken#transfer
-  Transaction:         0x67bd5b38b6608a72cf3cef637a97efb9376385be261550731120336c5d216536
+  Transaction:         0xc8b25379cffc8913312457bcbb1eaed6800b2b50dafe1ebe84d48030eaa6b1e8
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
   Value:               0 ETH
   Gas used:            52244 of 52244
-  Block #9:            0x698a9607a7763f27ea647f5a4580f18f04831bad81c64a8664dceee71e68231b
-
-[32meth_getTransactionByHash[0m
-[32meth_getBlockByNumber[0m
-[32meth_getTransactionReceipt[0m
-[32meth_getTransactionCount[0m
-[32meth_getBlockByNumber[0m
-[32meth_chainId[0m
-[32meth_maxPriorityFeePerGas[0m
-[32meth_estimateGas[0m
-[32meth_call[0m
-  Contract call:       DAOToken#transfer
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-[32meth_sendTransaction[0m
-  Contract call:       DAOToken#transfer
-  Transaction:         0x29608eb5648bc0ceb780a88a610662a89aa727086d4d4650141adbe7a1b04a7e
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-  Value:               0 ETH
-  Gas used:            52244 of 52244
-  Block #10:           0x2ad84fb865ad1566b7426d49fbbc8ea7c280d6000b9a4365ff0e47f9d091dd44
+  Block #10:           0xcdd942bcf5b776d2857aafb1db3b28dd4a0168d12246125e754bcef4faf9d84a
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
@@ -313,40 +311,63 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 
 [32meth_sendTransaction[0m
   Contract call:       PaymentToken#transfer
-  Transaction:         0xd07ca861cd09e37eabf5275cac9cdfcbceeee52b8b7788da3d8c3a387f850cdd
+  Transaction:         0x703efed4659924ab5facd64f575c3879f53d04c8f687354a3788778cefdb6b8f
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
   Value:               0 ETH
   Gas used:            52244 of 52244
-  Block #11:           0xf623136923a4a7826b741696924ec04c5ffaa9541bd7579f546d4b104ce8e1f1
+  Block #11:           0xfe5d71c41674617c76b564c297ce95812d484e3263ebd7c984eed6c6b031c5f7
 
 [32meth_getTransactionByHash[0m
 [32meth_getBlockByNumber[0m
 [32meth_getTransactionReceipt[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_blockNumber[0m
-[32meth_blockNumber (2)[0m
+[32meth_getBlockByNumber[0m
+[32meth_getTransactionCount[0m
+[32meth_getBlockByNumber[0m
+[32meth_chainId[0m
+[32meth_maxPriorityFeePerGas[0m
+[32meth_estimateGas[0m
+[32meth_call[0m
+  Contract call:       DAOToken#transfer
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+
+[32meth_sendTransaction[0m
+  Contract call:       DAOToken#transfer
+  Transaction:         0x316c73d267f6802c6c89acde3662b92567c20f4a5a03975814b809adc8592eda
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  Value:               0 ETH
+  Gas used:            47456 of 52276
+  Block #12:           0x6dc149baf5c20c29da61bfb82000040f029bab3c3a6472b62569bfd17e02ec55
+
+[32meth_getTransactionByHash[0m
+[32meth_getBlockByNumber[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionCount[0m
+[32meth_getBlockByNumber[0m
+[32meth_chainId[0m
+[32meth_maxPriorityFeePerGas[0m
+[32meth_estimateGas[0m
+[32meth_call[0m
+  Contract call:       PaymentToken#transfer
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+
+[32meth_sendTransaction[0m
+  Contract call:       PaymentToken#transfer
+  Transaction:         0x7613027df7f5b71abcd2591c71535dcabce239bb38cffdde0eccd89210842219
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            47456 of 52276
+  Block #13:           0x01b2775d2a030acc551df8a7faac3e7b727c825475612bb63638af161bebffae
+
+[32meth_getTransactionByHash[0m
+[32meth_getBlockByNumber[0m
+[32meth_getTransactionReceipt[0m
+[32mnet_version[0m
 [32meth_accounts[0m
-[32meth_accounts (2)[0m
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       PaymentToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-  Error: Transaction reverted without a reason
-
-[32meth_blockNumber[0m
 [32meth_getBalance[0m
 [32meth_getBalance (2)[0m
 [32meth_getBalance (3)[0m
@@ -357,565 +378,860 @@ Any funds sent to them on Mainnet or any other live network WILL BE LOST.
 [32meth_getBalance (8)[0m
 [32meth_getBalance (9)[0m
 [32meth_getBalance (10)[0m
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBlockByNumber[0m
+[32meth_chainId[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_call[0m
+  Contract call:       DAONFT#tokenPrice
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
 
-  Error: Transaction reverted without a reason
+[32meth_getCode[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_accounts[0m
+[32mnet_version[0m
+[32meth_chainId[0m
+[32meth_chainId (2)[0m
+[32meth_estimateGas[0m
+[32meth_blockNumber[0m
+[32meth_sendTransaction[0m
+  Contract call:       DAONFT#buyPopTokens
+  Transaction:         0xcc33787a453ac46d92cf89f1fe1b4bbc4428853ef6c1d53caa23f1373f20031c
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+  Value:               10. ETH
+  Gas used:            70894 of 71447
+  Block #14:           0x3d6e8ed832324c8c7fdd52756345420142aa0b8fb0cc282ff22f8e4768bab797
 
-[31meth_call[0m
-  Contract call:       PaymentToken#<unrecognized-selector>
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32mnet_version[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionByHash (2)[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getCode[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32mnet_version[0m
+[32meth_chainId[0m
+[32meth_chainId (2)[0m
+[32meth_estimateGas[0m
+[32meth_blockNumber[0m
+[32meth_sendTransaction[0m
+  Contract call:       PaymentToken#approve
+  Transaction:         0xecaa0e11964eee9fbb93e21a4a0d7e22b454b8131b167331b5f2d98d3fb563e3
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            46892 of 46892
+  Block #15:           0xfe80b0c938c317111aad6bc63c5c67606d0d3c3007dc3ecbdb0c4fe7eb6dd48d
+
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32mnet_version[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionByHash (2)[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getCode[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_accounts[0m
+[32mnet_version[0m
+[32meth_chainId[0m
+[32meth_chainId (2)[0m
+[31meth_estimateGas[0m
+  Contract call:       DAONFT#buyGovernanceTokens
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+  Value:               0 ETH
+
+  Error: VM Exception while processing transaction: reverted with an unrecognized custom error (return data: 0xfb8f41b20000000000000000000000009fe46736679d2d9a65f0992f2272de9f3c7fa6e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a)
+
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_call[0m
+  Contract call:       PaymentToken#balanceOf
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       PaymentToken#<unrecognized-selector>
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_call[0m
+  Contract call:       PaymentToken#balanceOf
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32mnet_version[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32mnet_version[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32mnet_version[0m
+[32meth_chainId[0m
+[32meth_chainId (2)[0m
+[32meth_estimateGas[0m
+[32meth_blockNumber[0m
+[32meth_sendTransaction[0m
+  Contract call:       PaymentToken#approve
+  Transaction:         0xbb51f336de766d426b78f46aa8d816d5721c1913fc87f666967e2ad4d839ca61
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
+  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+  Value:               0 ETH
+  Gas used:            46892 of 46892
+  Block #16:           0x86d908d4094488e9c4992398c0db28c6e8ec5957d25dd972219e1a779028d244
 
-  Error: Transaction reverted without a reason
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32mnet_version[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionByHash (2)[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getCode[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_accounts[0m
+[32mnet_version[0m
+[32meth_chainId[0m
+[32meth_chainId (2)[0m
+[32meth_estimateGas[0m
+[32meth_blockNumber[0m
+[32meth_sendTransaction[0m
+  Contract call:       DAONFT#buyGovernanceTokens
+  Transaction:         0x64a1f96c56505a60d056e8a67155b11808359cfba84aae38fd27fbc6c66b022d
+  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+  To:                  0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+  Value:               0 ETH
+  Gas used:            88744 of 88744
+  Block #17:           0x500e0a6860dd08811458846be8a2be5f60744f0e77322d838e5e112a7d385567
 
-[31meth_call[0m
-  Contract call:       PaymentToken#<unrecognized-selector>
+[32meth_getTransactionReceipt[0m
+[32meth_blockNumber[0m
+[32mnet_version[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getTransactionByHash[0m
+[32meth_getTransactionByHash (2)[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getTransactionReceipt[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getCode[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_call[0m
+  Contract call:       PaymentToken#balanceOf
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
 
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
+[32mnet_version[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_call[0m
+  Contract call:       DAOToken#balanceOf
   From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
   To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
 
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       DAOToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0x5fbdb2315678afecb367f032d93f642f64180aa3
-
-  Error: Transaction reverted without a reason
-
-[31meth_call[0m
-  Contract call:       PaymentToken#<unrecognized-selector>
-  From:                0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
-  To:                  0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-
-  Error: Transaction reverted without a reason
-
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_subscribe (6)[0m
-[32meth_subscribe (7)[0m
-[32meth_subscribe (8)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_unsubscribe (7)[0m
-[32meth_unsubscribe (8)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_subscribe (6)[0m
-[32meth_subscribe (7)[0m
-[32meth_subscribe (8)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_unsubscribe (7)[0m
-[32meth_unsubscribe (8)[0m
-[32meth_unsubscribe (9)[0m
-[32meth_unsubscribe (10)[0m
-[32meth_unsubscribe (11)[0m
-[32meth_unsubscribe (12)[0m
-[32meth_unsubscribe (13)[0m
-[32meth_unsubscribe (14)[0m
-[32meth_unsubscribe (15)[0m
-[32meth_unsubscribe (16)[0m
-[32meth_unsubscribe (17)[0m
-[32meth_unsubscribe (18)[0m
-[32meth_unsubscribe (19)[0m
-[32meth_unsubscribe (20)[0m
-[32meth_unsubscribe (21)[0m
-[32meth_unsubscribe (22)[0m
-[32meth_unsubscribe (23)[0m
-[32meth_unsubscribe (24)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_subscribe (6)[0m
-[32meth_subscribe (7)[0m
-[32meth_subscribe (8)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_unsubscribe (7)[0m
-[32meth_unsubscribe (8)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_subscribe (6)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_unsubscribe (7)[0m
-[32meth_unsubscribe (8)[0m
-[32meth_unsubscribe (9)[0m
-[32meth_unsubscribe (10)[0m
-[32meth_unsubscribe (11)[0m
-[32meth_unsubscribe (12)[0m
-[32meth_unsubscribe (13)[0m
-[32meth_unsubscribe (14)[0m
-[32meth_unsubscribe (15)[0m
-[32meth_unsubscribe (16)[0m
-[32meth_unsubscribe (17)[0m
-[32meth_unsubscribe (18)[0m
-[32meth_unsubscribe (19)[0m
-[32meth_unsubscribe (20)[0m
-[32meth_unsubscribe (21)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_subscribe (6)[0m
-[32meth_subscribe (7)[0m
-[32meth_subscribe (8)[0m
-[32meth_subscribe (9)[0m
-[32meth_subscribe (10)[0m
-[32meth_subscribe (11)[0m
-[32meth_subscribe (12)[0m
-[32meth_subscribe (13)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_unsubscribe (7)[0m
-[32meth_unsubscribe (8)[0m
-[32meth_subscribe[0m
-[32meth_subscribe (2)[0m
-[32meth_subscribe (3)[0m
-[32meth_subscribe (4)[0m
-[32meth_subscribe (5)[0m
-[32meth_subscribe (6)[0m
-[32meth_subscribe (7)[0m
-[32meth_subscribe (8)[0m
-[32meth_unsubscribe[0m
-[32meth_unsubscribe (2)[0m
-[32meth_unsubscribe (3)[0m
-[32meth_unsubscribe (4)[0m
-[32meth_unsubscribe (5)[0m
-[32meth_unsubscribe (6)[0m
-[32meth_unsubscribe (7)[0m
-[32meth_unsubscribe (8)[0m
-[32meth_unsubscribe (9)[0m
-[32meth_unsubscribe (10)[0m
-[32meth_unsubscribe (11)[0m
-[32meth_unsubscribe (12)[0m
-[32meth_unsubscribe (13)[0m
-[32meth_unsubscribe (14)[0m
-[32meth_unsubscribe (15)[0m
-[32meth_unsubscribe (16)[0m
-[32meth_unsubscribe (17)[0m
-[32meth_unsubscribe (18)[0m
-[32meth_unsubscribe (19)[0m
-[32meth_unsubscribe (20)[0m
-[32meth_unsubscribe (21)[0m
-[32meth_unsubscribe (22)[0m
-[32meth_unsubscribe (23)[0m
-[32meth_unsubscribe (24)[0m
-[32mhardhat_addCompilationResult[0m
-[32mhardhat_addCompilationResult (2)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBalance (23)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32mnet_version (2)[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32meth_getBlockByNumber[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32mnet_version[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32mnet_version[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32mnet_version[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m
+[32meth_getBlockByNumber[0m
+[32mnet_version[0m
+[32meth_accounts[0m
+[32meth_getBalance[0m
+[32mnet_version[0m
+[32meth_getBalance[0m
+[32meth_getBalance (2)[0m
+[32meth_getBalance (3)[0m
+[32meth_getBalance (4)[0m
+[32meth_getBalance (5)[0m
+[32meth_getBalance (6)[0m
+[32meth_getBalance (7)[0m
+[32meth_getBalance (8)[0m
+[32meth_getBalance (9)[0m
+[32meth_getBalance (10)[0m
+[32meth_getBalance (11)[0m
+[32meth_getBalance (12)[0m
+[32meth_getBalance (13)[0m
+[32meth_getBalance (14)[0m
+[32meth_getBalance (15)[0m
+[32meth_getBalance (16)[0m
+[32meth_getBalance (17)[0m
+[32meth_getBalance (18)[0m
+[32meth_getBalance (19)[0m
+[32meth_getBalance (20)[0m
+[32meth_getBalance (21)[0m
+[32meth_getBalance (22)[0m

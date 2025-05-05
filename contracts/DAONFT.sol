@@ -10,6 +10,7 @@ contract DAONFT is ERC721 {
     IERC20 public paymentToken;
     uint256 private _tokenIdCounter;
     uint256 public tokenPrice;
+    uint256 public paymentTokenPrice;
 
     struct NFTProposal {
         string tokenURI;
@@ -43,11 +44,13 @@ contract DAONFT is ERC721 {
     constructor(
         address _governanceToken,
         address _paymentToken,
-        uint256 _tokenPrice
+        uint256 _tokenPrice,
+        uint256 _paymentTokenPrice
     ) ERC721("DAONFT", "DNFT") {
         governanceToken = DAOToken(_governanceToken);
-        paymentToken = IERC20(_paymentToken);
+        paymentToken = PaymentToken(_paymentToken);
         tokenPrice = _tokenPrice;
+        paymentTokenPrice = _paymentTokenPrice;
     }
 
     function mintNFT() public {
@@ -59,14 +62,37 @@ contract DAONFT is ERC721 {
         return baseRequiredVotes + (circulatingSupply / difficultyDivider);
     }
 
+     function buyPopTokens(uint256 amount) public payable {
+        require(amount > 0, "Amount must be greater than 0");
+        uint256 ethRequired = amount * tokenPrice;
+        require(msg.value >= ethRequired, "Insufficient ETH sent");
+        
+        uint256 contractBalance = paymentToken.balanceOf(address(this));
+        require(contractBalance >= amount, "Insufficient tokens in contract");
+        
+        bool success = paymentToken.transfer(msg.sender, amount);
+        require(success, "Token transfer failed");
+        
+        // Возвращаем излишки ETH, если пользователь отправил больше чем нужно
+        if (msg.value > ethRequired) {
+            payable(msg.sender).transfer(msg.value - ethRequired);
+        }
+        
+        emit TokensPurchased(msg.sender, ethRequired, amount);
+    }
+
     function buyGovernanceTokens(uint256 amount) public {
         uint256 cost = amount * tokenPrice;
+        uint256 contractBalance = paymentToken.balanceOf(address(this));
+        require(contractBalance >= amount, "Insufficient tokens in contract");
+        
         require(
             paymentToken.transferFrom(msg.sender, address(this), cost),
             "Payment failed"
         );
-
-        governanceToken.mint(msg.sender, amount);
+        
+        bool success = governanceToken.transfer(msg.sender, amount);
+        require(success, "Token transfer failed");
 
         emit TokensPurchased(msg.sender, amount, cost);
     }
