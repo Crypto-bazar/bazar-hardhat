@@ -1,63 +1,66 @@
 // scripts/deploy.ts
 import { buildModule } from "@nomicfoundation/hardhat-ignition/modules";
-import { parseUnits } from "ethers";
+import { parseEther } from "ethers";
 
-const DAOModule = buildModule("DAOModule", (m) => {
-  const initialSupplyDAO = m.getParameter("initialSupply", 1_000_000);
-  const initialSupplyNFT = m.getParameter("initialSupply", 1_000_000);
-  const requiredVotes = m.getParameter("requiredVotes", parseUnits("10000", 18));
+const DAONFTModule = buildModule("DAONFTModule", (m) => {
+  // Параметры для токенов
+  const initialSupply = m.getParameter("initialSupply", parseEther("1000000"));
+  const tokenPrice = m.getParameter("tokenPrice", parseEther("0.000000000000000001"));
+  const paymentTokenPrice = m.getParameter("paymentTokenPrice", parseEther("0.000000000000000001"));
+  const requiredVotes = m.getParameter("requiredVotes", parseEther("10000"));
 
-  const voter1 = m.getParameter("voter1", "0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
-  const voter2 = m.getParameter("voter2", "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC");
-  const voter3 = m.getParameter("voter3", "0x90F79bf6EB2c4f870365E785982E1f101E93b906");
-  const voter4 = m.getParameter("voter4", "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65");
+  // Деплой токенов
+  const daoToken = m.contract("DAOToken", [initialSupply]);
+  const paymentToken = m.contract("PaymentToken", [initialSupply]);
 
-  const daoToken = m.contract("DAOToken", [initialSupplyDAO]);
-  const paymentToken = m.contract("PaymentToken", [initialSupplyNFT]);
-
-  m.call(daoToken, "transfer", [voter1, parseUnits("100", 18)], {
-    after: [daoToken],
-    id: "TransferToVoter1",
+  // Деплой DAONFT контракта с нужными параметрами
+  const daoNFT = m.contract("DAONFT", [
+    daoToken,
+    paymentToken,
+    tokenPrice,
+    paymentTokenPrice
+  ], {
+    after: [daoToken, paymentToken]
   });
 
-  m.call(daoToken, "transfer", [voter2, parseUnits("200", 18)], {
-    after: [daoToken],
-    id: "TransferToVoter2",
+  // Настройка распределения токенов для тестирования
+  const testAccounts = [
+    "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+    "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65"
+  ];
+
+  // Распределение токенов между тестовыми аккаунтами
+  // Массивы для хранения ссылок на вызовы transfer
+  const daoTokenTransfers = testAccounts.map((account, index) => {
+    const amount = parseEther((100 * (index + 1)).toString());
+    return m.call(daoToken, "transfer", [account, amount], {
+      after: [daoToken],
+      id: `TransferDAOTokenTo${index}`
+    });
   });
 
-  m.call(daoToken, "transfer", [voter3, parseUnits("300", 18)], {
-    after: [daoToken],
-    id: "TransferToVoter3",
+  const paymentTokenTransfers = testAccounts.map((account, index) => {
+    const amount = parseEther((100 * (index + 1)).toString());
+    return m.call(paymentToken, "transfer", [account, amount], {
+      after: [paymentToken],
+      id: `TransferPaymentTokenTo${index}`
+    });
   });
 
-  m.call(daoToken, "transfer", [voter4, parseUnits("400", 18)], {
-    after: [daoToken],
-    id: "TransferToVoter4",
+  m.call(daoToken, "transfer", [daoNFT, parseEther("999000")], {
+    after: daoTokenTransfers,
+    id: "TransferRemainingDAOTokenToDAONFT"
   });
 
-  m.call(paymentToken, "transfer", [voter1, parseUnits("100", 18)], {
-    after: [paymentToken],
-    id: "TransferToVoter1Payment",
+  m.call(paymentToken, "transfer", [daoNFT, parseEther("999000")], {
+    after: paymentTokenTransfers,
+    id: "TransferRemainingPaymentTokenToDAONFT"
   });
 
-  m.call(paymentToken, "transfer", [voter2, parseUnits("200", 18)], {
-    after: [paymentToken],
-    id: "TransferToVoter2Payment",
-  });
 
-  m.call(paymentToken, "transfer", [voter3, parseUnits("300", 18)], {
-    after: [paymentToken],
-    id: "TransferToVoter3Payment",
-  });
-
-  m.call(paymentToken, "transfer", [voter4, parseUnits("400", 18)], {
-    after: [paymentToken],
-    id: "TransferToVoter4Payment",
-  });
-
-  const daoNFT = m.contract("DAONFT", [daoToken, paymentToken], { after: [daoToken, paymentToken] });
-
-  return { daoToken, daoNFT };
+  return { daoToken, paymentToken, daoNFT };
 });
 
-export default DAOModule;
+export default DAONFTModule;

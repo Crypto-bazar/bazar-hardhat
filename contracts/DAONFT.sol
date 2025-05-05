@@ -6,10 +6,11 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./Token.sol";
 
 contract DAONFT is ERC721 {
-    IERC20 public governanceToken;
+    DAOToken public governanceToken;
     IERC20 public paymentToken;
     uint256 private _tokenIdCounter;
     uint256 public tokenPrice;
+    uint256 public paymentTokenPrice;
 
     struct NFTProposal {
         string tokenURI;
@@ -19,7 +20,7 @@ contract DAONFT is ERC721 {
     }
 
     struct NFTSales {
-        uint tokenId;
+        uint256 tokenId;
         address owner;
         uint256 price;
         bool sold;
@@ -30,47 +31,87 @@ contract DAONFT is ERC721 {
     mapping(uint256 => NFTSales) public nftSales;
 
     uint256 public proposalCounter;
-    uint256 public requiredVotes = 1000 * 10 ** 18;
+    uint256 public baseRequiredVotes = 1000 * 10**18;
+    uint256 public difficultyDivider = 1000000000000000000;
 
     event NFTProposed(
         uint256 indexed proposalId,
         string tokenURI,
         address proposer
     );
-
     event Voted(
         uint256 indexed proposalId,
         address indexed voter,
         string tokenURI,
-        uint amount
+        uint256 amount
     );
-
     event NFTInSale(
         uint256 indexed tokenId,
         address indexed owner,
         uint256 price
     );
-
     event NFTSold(
         uint256 indexed tokenId,
         address indexed buyer,
         uint256 price
     );
-
+    event TokensPurchased(address indexed buyer, uint256 amount, uint256 cost);
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
     constructor(
         address _governanceToken,
-        address _paymentToken
+        address _paymentToken,
+        uint256 _tokenPrice,
+        uint256 _paymentTokenPrice
     ) ERC721("DAONFT", "DNFT") {
-        governanceToken = IERC20(_governanceToken);
-        paymentToken = IERC20(_paymentToken);
-        _tokenIdCounter = 0;
-        proposalCounter = 0;
+        governanceToken = DAOToken(_governanceToken);
+        paymentToken = PaymentToken(_paymentToken);
+        tokenPrice = _tokenPrice;
+        paymentTokenPrice = _paymentTokenPrice;
     }
 
-     function mintNFT() public {
+    function mintNFT() public {
         _mint(msg.sender, _tokenIdCounter++);
+    }
+
+    function getRequiredVotes() public view returns (uint256) {
+        uint256 circulatingSupply = governanceToken.totalSupply();
+        return baseRequiredVotes + (circulatingSupply / difficultyDivider);
+    }
+
+    function buyPopTokens(uint256 amount) public payable {
+        require(amount > 0, "Amount must be greater than 0");
+        uint256 ethRequired = amount * paymentTokenPrice;
+        require(msg.value >= ethRequired, "Insufficient ETH sent");
+        
+        uint256 contractBalance = paymentToken.balanceOf(address(this));
+        require(contractBalance >= amount, "Insufficient tokens in contract");
+        
+        bool success = paymentToken.transfer(msg.sender, amount);
+        require(success, "Token transfer failed");
+        
+        // Возвращаем излишки ETH, если пользователь отправил больше чем нужно
+        if (msg.value > ethRequired) {
+            payable(msg.sender).transfer(msg.value - ethRequired);
+        }
+        
+        emit TokensPurchased(msg.sender, ethRequired, amount);
+    }
+
+    function buyGovernanceTokens(uint256 amount) public {
+        uint256 cost = amount * tokenPrice;
+        uint256 contractBalance = paymentToken.balanceOf(address(this));
+        require(contractBalance >= amount, "Insufficient tokens in contract");
+
+        require(
+            paymentToken.transferFrom(msg.sender, address(this), cost),
+            "Payment failed"
+        );
+
+        bool success = governanceToken.transfer(msg.sender, amount);
+        require(success, "Token transfer failed");
+
+        emit TokensPurchased(msg.sender, amount, cost);
     }
 
     function buyNFT(uint256 tokenId) public {
@@ -134,7 +175,7 @@ contract DAONFT is ERC721 {
             voterBalance
         );
 
-        if (nftProposals[proposalId].votes >= requiredVotes) {
+        if (nftProposals[proposalId].votes >= getRequiredVotes()) {
             mintApprovedNFT(proposalId);
         }
     }
@@ -143,11 +184,11 @@ contract DAONFT is ERC721 {
         NFTProposal storage proposal = nftProposals[proposalId];
         require(!proposal.minted, "Already minted");
 
-        _tokenIdCounter++;
         uint256 newTokenId = _tokenIdCounter;
-
         _mint(proposal.proposer, newTokenId);
         proposal.minted = true;
+
+        _tokenIdCounter++;
 
         emit NFTMinted(newTokenId, proposal.tokenURI, proposal.proposer);
     }
@@ -155,9 +196,7 @@ contract DAONFT is ERC721 {
     function getProposeNFT() public view returns (NFTProposal[] memory) {
         NFTProposal[] memory proposals = new NFTProposal[](proposalCounter);
         for (uint256 i = 0; i < proposalCounter; i++) {
-            if (nftProposals[i + 1].proposer != address(0)) {
-                proposals[i] = nftProposals[i + 1];
-            }
+            proposals[i] = nftProposals[i + 1];
         }
         return proposals;
     }
