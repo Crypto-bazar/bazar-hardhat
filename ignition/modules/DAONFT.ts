@@ -59,6 +59,10 @@ const DAONFTModule = buildModule("DAONFTModule", (m) => {
     id: "TransferRemainingPaymentTokenToDAONFT"
   });
 
+  m.call(daoToken, "changeOwner", [daoNFT], {
+    after: [daoNFT],
+    id: "ChangeOwnerToDAONFT"
+  });
 
   return { daoToken, paymentToken, daoNFT };
 });

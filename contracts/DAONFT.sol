@@ -17,6 +17,7 @@ contract DAONFT is ERC721 {
         address proposer;
         uint256 votes;
         bool minted;
+        uint256 mintedTokenId; // Добавлено: храним ID minted токена
     }
 
     struct NFTSales {
@@ -27,6 +28,9 @@ contract DAONFT is ERC721 {
         bool sold;
     }
 
+    // Добавлено: mapping для быстрого поиска creator по tokenId
+    mapping(uint256 => address) public tokenIdToCreator;
+    
     mapping(uint256 => NFTProposal) public nftProposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
     mapping(uint256 => NFTSales) public nftSales;
@@ -34,28 +38,12 @@ contract DAONFT is ERC721 {
     uint256 public proposalCounter;
     uint256 public baseRequiredVotes = 1000 * 10**18;
     uint256 public difficultyDivider = 1000000000000;
+    uint256 public creationTimestamp;
 
-    event NFTProposed(
-        uint256 indexed proposalId,
-        string tokenURI,
-        address proposer
-    );
-    event Voted(
-        uint256 indexed proposalId,
-        address indexed voter,
-        string tokenURI,
-        uint256 amount
-    );
-    event NFTInSale(
-        uint256 indexed tokenId,
-        address indexed owner,
-        uint256 price
-    );
-    event NFTSold(
-        uint256 indexed tokenId,
-        address indexed buyer,
-        uint256 price
-    );
+    event NFTProposed(uint256 indexed proposalId, string tokenURI, address proposer);
+    event Voted(uint256 indexed proposalId, address indexed voter, string tokenURI, uint256 amount);
+    event NFTInSale(uint256 indexed tokenId, address indexed owner, uint256 price);
+    event NFTSold(uint256 indexed tokenId, address indexed buyer, uint256 price);
     event TokensPurchased(address indexed buyer, uint256 amount, uint256 cost);
     event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
 
@@ -69,15 +57,18 @@ contract DAONFT is ERC721 {
         paymentToken = PaymentToken(_paymentToken);
         tokenPrice = _tokenPrice;
         paymentTokenPrice = _paymentTokenPrice;
+        creationTimestamp = block.timestamp;
     }
 
     function mintNFT() public {
         _mint(msg.sender, _tokenIdCounter++);
     }
 
+    // Улучшенная функция сложности, учитывающая время и количество предложений
     function getRequiredVotes() public view returns (uint256) {
-        uint256 circulatingSupply = governanceToken.totalSupply();
-        return baseRequiredVotes + (circulatingSupply / difficultyDivider);
+        uint256 timeFactor = (block.timestamp - creationTimestamp) / 1 weeks;
+        uint256 proposalFactor = proposalCounter * 10**18;
+        return baseRequiredVotes + timeFactor + proposalFactor;
     }
 
     function buyPopTokens(uint256 amount) public payable {
@@ -91,7 +82,6 @@ contract DAONFT is ERC721 {
         bool success = paymentToken.transfer(msg.sender, amount);
         require(success, "Token transfer failed");
 
-        // Возвращаем излишки ETH, если пользователь отправил больше чем нужно
         if (msg.value > ethRequired) {
             payable(msg.sender).transfer(msg.value - ethRequired);
         }
@@ -121,13 +111,11 @@ contract DAONFT is ERC721 {
         uint256 creatorFee = (sale.price * 1) / 100;
         uint256 sellerAmount = sale.price - creatorFee;
 
-        // Покупатель платит контракту
         require(
             paymentToken.transferFrom(msg.sender, address(this), sale.price),
             "Payment failed"
         );
 
-        // Контракт распределяет средства
         require(
             paymentToken.transfer(sale.creator, creatorFee),
             "Creator fee failed"
@@ -145,26 +133,15 @@ contract DAONFT is ERC721 {
 
     function sellNFT(uint256 tokenId, uint256 price) public {
         require(ownerOf(tokenId) == msg.sender, "Not the owner");
-
-        // Поиск оригинального создателя (автора) NFT
-        address creator = address(0);
-        for (uint256 i = 1; i <= proposalCounter; i++) {
-            if (
-                nftProposals[i].minted &&
-                keccak256(bytes(nftProposals[i].tokenURI)) ==
-                keccak256(bytes(tokenURI(tokenId)))
-            ) {
-                creator = nftProposals[i].proposer;
-                break;
-            }
-        }
-
+        
+        // Теперь creator можно получить напрямую из mapping
+        address creator = tokenIdToCreator[tokenId];
         require(creator != address(0), "Creator not found");
 
         nftSales[tokenId] = NFTSales({
             tokenId: tokenId,
             owner: msg.sender,
-            creator: creator, // сохраняем автора
+            creator: creator,
             price: price,
             sold: false
         });
@@ -179,7 +156,8 @@ contract DAONFT is ERC721 {
             tokenURI: _tokenURI,
             proposer: msg.sender,
             votes: 0,
-            minted: false
+            minted: false,
+            mintedTokenId: 0
         });
 
         emit NFTProposed(proposalCounter, _tokenURI, msg.sender);
@@ -216,8 +194,12 @@ contract DAONFT is ERC721 {
 
         uint256 newTokenId = _tokenIdCounter;
         _mint(proposal.proposer, newTokenId);
+        
+        // Сохраняем информацию о creator
+        tokenIdToCreator[newTokenId] = proposal.proposer;
+        
         proposal.minted = true;
-
+        proposal.mintedTokenId = newTokenId;
         _tokenIdCounter++;
 
         emit NFTMinted(newTokenId, proposal.tokenURI, proposal.proposer);
