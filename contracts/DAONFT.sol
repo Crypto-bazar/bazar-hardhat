@@ -7,45 +7,52 @@ import "./Token.sol";
 
 contract DAONFT is ERC721 {
     DAOToken public governanceToken;
-    IERC20 public paymentToken;
-    uint256 private _tokenIdCounter;
+    PaymentToken public paymentToken;
+    uint256 private _tokenIdCounter = 1;
     uint256 public tokenPrice;
     uint256 public paymentTokenPrice;
 
-    struct NFTProposal {
-        string tokenURI;
-        address proposer;
-        uint256 votes;
-        bool minted;
-        uint256 mintedTokenId; // Добавлено: храним ID minted токена
-    }
-
-    struct NFTSales {
-        uint256 tokenId;
+    struct NFT {
+        uint256 id;
+        string name;
+        string description;
+        string imagePath;
+        uint256 price;
         address owner;
         address creator;
-        uint256 price;
-        bool sold;
+        bool forSale;
+        bool isProposal;
+        uint256 votes;
+        uint256 proposalId;
+        bool minted;
+        uint256 tokenId;
     }
 
-    // Добавлено: mapping для быстрого поиска creator по tokenId
-    mapping(uint256 => address) public tokenIdToCreator;
-    
-    mapping(uint256 => NFTProposal) public nftProposals;
     mapping(uint256 => mapping(address => bool)) public hasVoted;
-    mapping(uint256 => NFTSales) public nftSales;
-
+    NFT[] public nfts;
     uint256 public proposalCounter;
     uint256 public baseRequiredVotes = 1000 * 10**18;
-    uint256 public difficultyDivider = 1000000000000;
     uint256 public creationTimestamp;
 
-    event NFTProposed(uint256 indexed proposalId, string tokenURI, address proposer);
-    event Voted(uint256 indexed proposalId, address indexed voter, string tokenURI, uint256 amount);
-    event NFTInSale(uint256 indexed tokenId, address indexed owner, uint256 price);
-    event NFTSold(uint256 indexed tokenId, address indexed buyer, uint256 price);
+    event NFTProposed(uint256 indexed proposalId, address proposer);
+    event Voted(
+        uint256 indexed proposalId,
+        address indexed voter,
+        uint256 amount
+    );
+    event NFTListed(
+        uint256 indexed tokenId,
+        address indexed owner,
+        uint256 price
+    );
+    event NFTSold(
+        uint256 indexed tokenId,
+        address indexed buyer,
+        uint256 price
+    );
     event TokensPurchased(address indexed buyer, uint256 amount, uint256 cost);
-    event NFTMinted(uint256 indexed tokenId, string tokenURI, address owner);
+    event NFTMinted(uint256 indexed tokenId, address owner);
+    event NFTUpdated(uint256 indexed tokenId);
 
     constructor(
         address _governanceToken,
@@ -60,15 +67,20 @@ contract DAONFT is ERC721 {
         creationTimestamp = block.timestamp;
     }
 
-    function mintNFT() public {
-        _mint(msg.sender, _tokenIdCounter++);
-    }
-
-    // Улучшенная функция сложности, учитывающая время и количество предложений
     function getRequiredVotes() public view returns (uint256) {
         uint256 timeFactor = (block.timestamp - creationTimestamp) / 1 weeks;
         uint256 proposalFactor = proposalCounter * 10**18;
         return baseRequiredVotes + timeFactor + proposalFactor;
+    }
+
+    function buyGovernanceTokens(uint256 amount) public {
+        uint256 cost = amount * tokenPrice;
+        require(
+            paymentToken.transferFrom(msg.sender, address(this), cost),
+            "Payment failed"
+        );
+        governanceToken.mint(msg.sender, amount);
+        emit TokensPurchased(msg.sender, amount, cost);
     }
 
     function buyPopTokens(uint256 amount) public payable {
@@ -89,127 +101,147 @@ contract DAONFT is ERC721 {
         emit TokensPurchased(msg.sender, ethRequired, amount);
     }
 
-    function buyGovernanceTokens(uint256 amount) public {
-        uint256 cost = amount * tokenPrice;
-
-        require(
-            paymentToken.transferFrom(msg.sender, address(this), cost),
-            "Payment failed"
-        );
-
-        governanceToken.mint(msg.sender, amount);
-
-        emit TokensPurchased(msg.sender, amount, cost);
-    }
-
     function buyNFT(uint256 tokenId) public {
-        NFTSales storage sale = nftSales[tokenId];
+        NFT storage nft = nfts[tokenId];
+        require(nft.forSale, "NFT not for sale");
+        require(!nft.isProposal, "Cannot buy proposal");
 
-        require(!sale.sold, "NFT already sold");
-        require(sale.price > 0, "NFT not for sale");
-
-        uint256 creatorFee = (sale.price * 1) / 100;
-        uint256 sellerAmount = sale.price - creatorFee;
+        uint256 creatorFee = nft.price / 100; // 1% fee
+        uint256 sellerAmount = nft.price - creatorFee;
 
         require(
-            paymentToken.transferFrom(msg.sender, address(this), sale.price),
+            paymentToken.transferFrom(msg.sender, address(this), nft.price),
             "Payment failed"
         );
-
         require(
-            paymentToken.transfer(sale.creator, creatorFee),
+            paymentToken.transfer(nft.creator, creatorFee),
             "Creator fee failed"
         );
         require(
-            paymentToken.transfer(sale.owner, sellerAmount),
+            paymentToken.transfer(nft.owner, sellerAmount),
             "Payment to seller failed"
         );
 
-        _transfer(sale.owner, msg.sender, tokenId);
-        sale.sold = true;
+        _transfer(nft.owner, msg.sender, nft.tokenId);
+        nft.owner = msg.sender;
+        nft.forSale = false;
 
-        emit NFTSold(tokenId, msg.sender, sale.price);
+        emit NFTSold(tokenId, msg.sender, nft.price);
     }
 
-    function sellNFT(uint256 tokenId, uint256 price) public {
-        require(ownerOf(tokenId) == msg.sender, "Not the owner");
-        
-        // Теперь creator можно получить напрямую из mapping
-        address creator = tokenIdToCreator[tokenId];
-        require(creator != address(0), "Creator not found");
-
-        nftSales[tokenId] = NFTSales({
-            tokenId: tokenId,
-            owner: msg.sender,
-            creator: creator,
-            price: price,
-            sold: false
-        });
-
-        emit NFTInSale(tokenId, msg.sender, price);
+    function listNFT(uint256 tokenId, uint256 price) public {
+        NFT storage nft = nfts[tokenId];
+        require(nft.owner == msg.sender, "Not the owner");
+        nft.price = price;
+        nft.forSale = true;
+        emit NFTListed(tokenId, msg.sender, price);
     }
 
-    function proposeNFT(string memory _tokenURI) public {
+    function proposeNFT(
+        string memory _name,
+        string memory _description,
+        string memory _imagePath
+    ) public {
+        uint256 proposalId = nfts.length; // индекс будущей записи
+
+        nfts.push(
+            NFT({
+                id: proposalId,
+                name: _name,
+                description: _description,
+                imagePath: _imagePath,
+                price: 0,
+                owner: msg.sender,
+                creator: msg.sender,
+                forSale: false,
+                isProposal: true,
+                votes: 0,
+                proposalId: proposalId,
+                minted: false,
+                tokenId: 0
+            })
+        );
+
         proposalCounter++;
-
-        nftProposals[proposalCounter] = NFTProposal({
-            tokenURI: _tokenURI,
-            proposer: msg.sender,
-            votes: 0,
-            minted: false,
-            mintedTokenId: 0
-        });
-
-        emit NFTProposed(proposalCounter, _tokenURI, msg.sender);
+        emit NFTProposed(proposalId, msg.sender);
     }
 
     function voteForNFT(uint256 proposalId) public {
-        require(
-            nftProposals[proposalId].proposer != address(0),
-            "Proposal does not exist"
-        );
+        NFT storage nft = nfts[proposalId];
+        require(nft.isProposal, "Not a proposal");
         require(!hasVoted[proposalId][msg.sender], "Already voted");
 
         uint256 voterBalance = governanceToken.balanceOf(msg.sender);
         require(voterBalance > 0, "No governance tokens");
 
-        nftProposals[proposalId].votes += voterBalance;
+        nft.votes += voterBalance;
         hasVoted[proposalId][msg.sender] = true;
 
-        emit Voted(
-            proposalId,
-            msg.sender,
-            nftProposals[proposalId].tokenURI,
-            voterBalance
-        );
+        emit Voted(proposalId, msg.sender, voterBalance);
 
-        if (nftProposals[proposalId].votes >= getRequiredVotes()) {
-            mintApprovedNFT(proposalId);
+        if (nft.votes >= getRequiredVotes() && !nft.minted) {
+            _mintNFT(proposalId);
         }
     }
 
-    function mintApprovedNFT(uint256 proposalId) internal {
-        NFTProposal storage proposal = nftProposals[proposalId];
-        require(!proposal.minted, "Already minted");
+    function _mintNFT(uint256 proposalId) internal {
+        NFT storage proposal = nfts[proposalId];
+        uint256 newTokenId = _tokenIdCounter++;
 
-        uint256 newTokenId = _tokenIdCounter;
-        _mint(proposal.proposer, newTokenId);
-        
-        // Сохраняем информацию о creator
-        tokenIdToCreator[newTokenId] = proposal.proposer;
-        
+        _mint(proposal.creator, newTokenId);
+
         proposal.minted = true;
-        proposal.mintedTokenId = newTokenId;
-        _tokenIdCounter++;
-
-        emit NFTMinted(newTokenId, proposal.tokenURI, proposal.proposer);
+        proposal.tokenId = newTokenId;
+        proposal.isProposal = false;
+        emit NFTMinted(newTokenId, proposal.creator);
     }
 
-    function getProposeNFT() public view returns (NFTProposal[] memory) {
-        NFTProposal[] memory proposals = new NFTProposal[](proposalCounter);
-        for (uint256 i = 0; i < proposalCounter; i++) {
-            proposals[i] = nftProposals[i + 1];
+    function updateNFT(
+        uint256 tokenId,
+        string memory _name,
+        string memory _description,
+        string memory _imagePath
+    ) public {
+        require(ownerOf(tokenId) == msg.sender, "Not the owner");
+        NFT storage nft = nfts[tokenId];
+        nft.name = _name;
+        nft.description = _description;
+        nft.imagePath = _imagePath;
+        emit NFTUpdated(tokenId);
+    }
+
+    function getNFT(uint256 tokenId) public view returns (NFT memory) {
+        return nfts[tokenId];
+    }
+
+    function getAllNFTs() public view returns (NFT[] memory) {
+        NFT[] memory allNFTs = new NFT[](nfts.length);
+        for (uint256 i = 0; i < nfts.length; i++) {
+            allNFTs[i] = nfts[i];
         }
-        return proposals;
+        return allNFTs;
+    }
+
+    function getMintedProposals() public view returns (NFT[] memory) {
+        uint256 count = 0;
+
+        // First count how many NFTs were minted from proposals
+        for (uint256 i = 0; i < _tokenIdCounter; i++) {
+            if (nfts[i].isProposal == false && nfts[i].proposalId != 0) {
+                count++;
+            }
+        }
+
+        // Then populate the array
+        NFT[] memory mintedProposals = new NFT[](count);
+        uint256 index = 0;
+
+        for (uint256 i = 0; i < _tokenIdCounter; i++) {
+            if (nfts[i].isProposal == false && nfts[i].proposalId != 0) {
+                mintedProposals[index++] = nfts[i];
+            }
+        }
+
+        return mintedProposals;
     }
 }
