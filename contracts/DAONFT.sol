@@ -244,4 +244,19 @@ contract DAONFT is ERC721 {
 
         return mintedProposals;
     }
+
+    function getNFTsBatch(uint256[] memory tokenIds)
+        public
+        view
+        returns (NFT[] memory)
+    {
+        NFT[] memory result = new NFT[](tokenIds.length);
+
+        for (uint256 i = 0; i < tokenIds.length; i++) {
+            require(tokenIds[i] < nfts.length, "Invalid tokenId");
+            result[i] = nfts[tokenIds[i]];
+        }
+
+        return result;
+    }
 }
